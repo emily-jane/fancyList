@@ -53,13 +53,13 @@ FancyList.prototype.addItem = function(item) {
 };
 
 FancyList.prototype.addItems = function() {
-  this.itemsToAdd = this.setList(arguments);
-  this.editingEmptyList(this.itemsToAdd[0]);
-  for (var i = 0; i < this.itemsToAdd.length; i++) {
-    if (typeof this.itemsToAdd[i] === this.listType) {
-      this.list.push(this.itemsToAdd[i]);
+  var itemsToAdd = this.setList(arguments);
+  this.editingEmptyList(itemsToAdd[0]);
+  for (var i = 0; i < itemsToAdd.length; i++) {
+    if (typeof itemsToAdd[i] === this.listType) {
+      this.list.push(itemsToAdd[i]);
     } else {
-      console.log('Item ' + this.itemsToAdd[i] + ' has not been added to the list. You must enter an item of type ' + this.listType);
+      console.log('Item ' + itemsToAdd[i] + ' has not been added to the list. You must enter an item of type ' + this.listType);
     };
   };
 };
@@ -78,20 +78,20 @@ FancyList.prototype.insertItemAt = function(index, item) {
 };
 
 FancyList.prototype.insertItemsAt = function() {
-  this.indexNo = arguments[0];
-  this.itemsToInsert = this.setList(arguments);
-  this.itemsToInsert.splice(0,1);
-  this.editingEmptyList(this.itemsToInsert[0]);
-  for (var i = 0; i < this.itemsToInsert.length; i++) {
-    if (typeof this.itemsToInsert[i] === this.listType) {
-      if (typeof this.list[this.indexNo - 1] !== 'undefined' || this.indexNo === 0) {
-        this.list.splice(this.indexNo, 0, this.itemsToInsert[i]);
-        this.indexNo ++;
+  var indexNo = arguments[0];
+  var itemsToInsert = this.setList(arguments);
+  itemsToInsert.splice(0,1);
+  this.editingEmptyList(itemsToInsert[0]);
+  for (var i = 0; i < itemsToInsert.length; i++) {
+    if (typeof itemsToInsert[i] === this.listType) {
+      if (typeof this.list[indexNo - 1] !== 'undefined' || indexNo === 0) {
+        this.list.splice(indexNo, 0, itemsToInsert[i]);
+        indexNo ++;
       } else {
         console.log('The list has ' + this.list.length + ' items, please enter another index.')
       };
     } else {
-      console.log('Item ' + this.itemsToInsert[i] + ' has not been added to the list. You must enter an item of type ' + this.listType);
+      console.log('Item ' + itemsToInsert[i] + ' has not been added to the list. You must enter an item of type ' + this.listType);
     };
   }
 };
@@ -110,7 +110,7 @@ FancyList.prototype.removeItemAt = function(index) {
 
 FancyList.prototype.removeItemsAt = function(index, numberOfItems) {
   if (typeof this.list[0] !== 'undefined') {
-    if (typeof this.list[index + numberOfItems - 1] !== 'undefined' || index === 0) {
+    if (typeof this.list[index + numberOfItems] !== 'undefined' || index === 0) {
       for (var i = 0; i < numberOfItems; i++) {
         this.list.splice(index,1);
       };
@@ -123,7 +123,16 @@ FancyList.prototype.removeItemsAt = function(index, numberOfItems) {
 };
 
 FancyList.prototype.removeItem = function(item) {
-
+  var indexNo = this.list.indexOf(item);
+  if (typeof this.list[0] !== 'undefined') {
+    if (indexNo > -1) {
+      this.list.splice(indexNo,1);
+    } else {
+      console.log('This item does not exist in the list.')
+    }
+  } else {
+    console.log('This list is empty, please add some items.')
+  };
 };
 
 FancyList.prototype.removeItems = function() {
