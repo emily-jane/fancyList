@@ -63,3 +63,16 @@ FancyList.prototype.addItems = function() {
     };
   };
 };
+
+FancyList.prototype.insertItemAt = function(index, item) {
+  this.editingEmptyList(item);
+  if (typeof item === this.listType) {
+    if (typeof this.list[index - 1] !== 'undefined' || index === 0) {
+      this.list.splice(index, 0, item);
+    } else {
+      console.log('The list has ' + this.list.length + ' items, please enter another index.')
+    };
+  } else {
+    console.log('Item ' + item + ' has not been added to the list. You must enter an item of type ' + this.listType);
+  };
+};
