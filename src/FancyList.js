@@ -136,5 +136,18 @@ FancyList.prototype.removeItem = function(item) {
 };
 
 FancyList.prototype.removeItems = function() {
+  var itemsToRemove = this.setList(arguments);
+  if (typeof this.list[0] !== 'undefined') {
+    for (var i = 0; i < itemsToRemove.length; i++) {
+      var indexNo = this.list.indexOf(itemsToRemove[i]);
+      if (indexNo > -1) {
+        this.list.splice(indexNo,1);
+      } else {
+        console.log('Item ' + itemsToRemove[i] + ' does not exist in the list.')
+      }
+    };
+  } else {
+    console.log('This list is empty, please add some items.')
+  };
 
 }
