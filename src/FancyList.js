@@ -29,6 +29,12 @@ FancyList.prototype.setListType = function() {
   };
 };
 
+FancyList.prototype.editingEmptyList = function(item) {
+  if (this.listType === 'undefined') {
+    this.listType = typeof item;
+  }
+};
+
 FancyList.prototype.getItemAt = function(index) {
   console.log(this.list[index]);
 };
@@ -38,6 +44,7 @@ FancyList.prototype.getItemsAt = function(index, numberOfItems) {
 };
 
 FancyList.prototype.addItem = function(item) {
+  this.editingEmptyList(item);
   if (typeof item === this.listType) {
     this.list.push(item);
   } else {
@@ -47,6 +54,7 @@ FancyList.prototype.addItem = function(item) {
 
 FancyList.prototype.addItems = function() {
   this.itemsToAdd = this.setList(arguments);
+  this.editingEmptyList(this.itemsToAdd[0]);
   for (var i = 0; i < this.itemsToAdd.length; i++) {
     if (typeof this.itemsToAdd[i] === this.listType) {
       this.list.push(this.itemsToAdd[i]);
@@ -54,5 +62,4 @@ FancyList.prototype.addItems = function() {
       console.log('Item ' + this.itemsToAdd[i] + ' has not been added to the list. You must enter an item of type ' + this.listType);
     };
   };
-  console.log(this.list);
 };
