@@ -76,3 +76,22 @@ FancyList.prototype.insertItemAt = function(index, item) {
     console.log('Item ' + item + ' has not been added to the list. You must enter an item of type ' + this.listType);
   };
 };
+
+FancyList.prototype.insertItemsAt = function() {
+  this.indexNo = arguments[0];
+  this.itemsToInsert = this.setList(arguments);
+  this.itemsToInsert.splice(0,1);
+  this.editingEmptyList(this.itemsToInsert[0]);
+  for (var i = 0; i < this.itemsToInsert.length; i++) {
+    if (typeof this.itemsToInsert[i] === this.listType) {
+      if (typeof this.list[this.indexNo - 1] !== 'undefined' || this.indexNo === 0) {
+        this.list.splice(this.indexNo, 0, this.itemsToInsert[i]);
+        this.indexNo ++;
+      } else {
+        console.log('The list has ' + this.list.length + ' items, please enter another index.')
+      };
+    } else {
+      console.log('Item ' + this.itemsToInsert[i] + ' has not been added to the list. You must enter an item of type ' + this.listType);
+    };
+  }
+};
