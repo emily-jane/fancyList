@@ -95,3 +95,27 @@ FancyList.prototype.insertItemsAt = function() {
     };
   }
 };
+
+FancyList.prototype.removeItemAt = function(index) {
+  if (typeof this.list[0] !== 'undefined') {
+    if (typeof this.list[index - 1] !== 'undefined' || index === 0) {
+      this.list.splice(index,1);
+    } else {
+      console.log('The list has ' + this.list.length + ' items, please enter another index, or add some items to the list.')
+    };
+  } else {
+    console.log('This list is empty, please add some items.')
+  };
+};
+
+FancyList.prototype.removeItemsAt = function(index, numberOfItems) {
+
+};
+
+FancyList.prototype.removeItem = function(item) {
+
+};
+
+FancyList.prototype.removeItems = function() {
+
+}
