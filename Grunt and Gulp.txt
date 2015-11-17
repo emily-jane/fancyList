@@ -1,0 +1,39 @@
+GRUNT http://gruntjs.com/
+=====
+Please reproduce this folder structure:
+C:\files\config.json
+C:\files\test.js
+C:\release  << empty folder
+
+config.json
+===========
+{
+    "version": "1.00"
+}
+
+test.js
+=======
+function showVersion() {
+    alert("The version is **VERSION**");
+}
+
+NOTE: Please use any <DRIVE:> - C: drive is just to illustrate here
+
+Please come up with a basic "Gruntfile.js" (save this file to C:\files) which has a task called "DoWork" which does the following:
+1) Reads the version number ("1.00") from config.json
+2) Replaces the word **VERSION** in test.js with "1.00" and copies the edited file to C:\release
+
+Next:
+Create a HTML file that loads (via a <SCRIPT> tag) C:\release\test.js.
+Add a 2nd SCRIPT tag such as:
+<SCRIPT>
+    showVersion();
+</SCRIPT>
+
+End result: You should see an alert box which says "The version is 1.00"
+
+------------------------------------------------------------------------------------------
+
+GULP  http://gulpjs.com/
+====
+Please reproduce the GRUNT version as GULP
