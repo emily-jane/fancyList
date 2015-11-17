@@ -109,7 +109,17 @@ FancyList.prototype.removeItemAt = function(index) {
 };
 
 FancyList.prototype.removeItemsAt = function(index, numberOfItems) {
-
+  if (typeof this.list[0] !== 'undefined') {
+    if (typeof this.list[index + numberOfItems - 1] !== 'undefined' || index === 0) {
+      for (var i = 0; i < numberOfItems; i++) {
+        this.list.splice(index,1);
+      };
+    } else {
+      console.log('The list has ' + this.list.length + ' items, please enter another index, or add some items to the list.')
+    };
+  } else {
+    console.log('This list is empty, please add some items.')
+  };
 };
 
 FancyList.prototype.removeItem = function(item) {
