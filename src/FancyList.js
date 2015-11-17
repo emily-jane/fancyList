@@ -1,18 +1,17 @@
 var FancyList = function() {
 
-  this.list = [];
   this.listType = null;
 
-  this.setList(arguments);
+  this.list = this.setList(arguments);
   this.setListType();
 
 };
 
 FancyList.prototype.setList = function(arguments) {
   if (arguments[0] instanceof Array) {
-    this.list = arguments[0];
+    return Array.prototype.slice.call(arguments[0]);
   } else {
-    this.list = arguments;
+    return Array.prototype.slice.call(arguments);
   };
 };
 
@@ -38,4 +37,22 @@ FancyList.prototype.getItemsAt = function(index, numberOfItems) {
   console.log(this.list.slice(index, index + numberOfItems));
 };
 
-FancyList.prototype.
+FancyList.prototype.addItem = function(item) {
+  if (typeof item === this.listType) {
+    this.list.push(item);
+  } else {
+    console.log('Item ' + item + ' has not been added to the list. You must enter an item of type ' + this.listType);
+  };
+};
+
+FancyList.prototype.addItems = function() {
+  this.itemsToAdd = this.setList(arguments);
+  for (var i = 0; i < this.itemsToAdd.length; i++) {
+    if (typeof this.itemsToAdd[i] === this.listType) {
+      this.list.push(this.itemsToAdd[i]);
+    } else {
+      console.log('Item ' + this.itemsToAdd[i] + ' has not been added to the list. You must enter an item of type ' + this.listType);
+    };
+  };
+  console.log(this.list);
+};
